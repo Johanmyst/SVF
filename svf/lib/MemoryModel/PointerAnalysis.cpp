@@ -72,7 +72,7 @@ PointerAnalysis::PointerAnalysis(SVFIR* p, PTATY ty, bool alias_check) :
     OnTheFlyIterBudgetForStat = Options::StatBudget();
     print_stat = Options::PStat();
     ptaImplTy = BaseImpl;
-    alias_validation = (alias_check && Options::EnableAliasCheck());
+    alias_validation = (alias_check || Options::EnableAliasCheck());
 }
 
 /*!

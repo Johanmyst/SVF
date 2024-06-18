@@ -40,7 +40,7 @@ using namespace SVFUtil;
 
 SVFG* SVFGBuilder::buildPTROnlySVFG(BVDataPTAImpl* pta)
 {
-    if(Options::OPTSVFG())
+    if(Options::OPTSVFG() || this->OptimiseSVFG)
         return build(pta, VFG::PTRONLYSVFG_OPT);
     else
         return build(pta, VFG::PTRONLYSVFG);
@@ -48,7 +48,10 @@ SVFG* SVFGBuilder::buildPTROnlySVFG(BVDataPTAImpl* pta)
 
 SVFG* SVFGBuilder::buildFullSVFG(BVDataPTAImpl* pta)
 {
-    return build(pta, VFG::FULLSVFG);
+    if(Options::OPTSVFG() || this->OptimiseSVFG)
+        return build(pta, VFG::FULLSVFG_OPT);
+    else
+        return build(pta, VFG::FULLSVFG);
 }
 
 
