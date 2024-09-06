@@ -71,11 +71,8 @@ message(STATUS "Found SVF Package:
         SVF_CXX_STANDARD:               ${SVF_CXX_STANDARD}
         SVF_ENABLE_EXCEPTIONS:          ${SVF_EABLE_EXCEPTIONS}")
 
-
-include(CMakeFindDependencyMacro)
-
-
-find_dependency(
+# Find Z3 and its include directory from the top-level include file; try from CMake package first
+find_package(
     Z3
     CONFIG
     HINTS
@@ -110,6 +107,8 @@ else()
     set(CMAKE_INSTALL_RPATH ${Z3_INCLUDES})
     include_directories(SYSTEM ${Z3_INCLUDES})
 endif()
+
+include(CMakeFindDependencyMacro)
 
 find_dependency(
     LLVM
