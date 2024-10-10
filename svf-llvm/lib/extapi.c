@@ -499,6 +499,30 @@ void *_ZnamRKSt9nothrow_t(unsigned long size, void *)
     return NULL;
 }
 
+__attribute__((annotate("ALLOC_RET"), annotate("AllocSize:Arg0")))
+void *_ZnwmSt11align_val_t(unsigned long size, unsigned long)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_RET"), annotate("AllocSize:Arg0")))
+void *_ZnamSt11align_val_t(unsigned long size, unsigned long)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_RET"), annotate("AllocSize:Arg0")))
+void *_ZnwmSt11align_val_tRKSt9nothrow_t(unsigned long size, unsigned long, void *)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_RET"), annotate("AllocSize:Arg0")))
+void *_ZnamSt11align_val_tRKSt9nothrow_t(unsigned long size, unsigned long, void *)
+{
+    return NULL;
+}
+
 __attribute__((annotate("ALLOC_ARG0"), annotate("AllocSize:UNKNOWN")))
 int asprintf(char **restrict strp, const char *restrict fmt, ...)
 {
@@ -733,6 +757,91 @@ void *SyGetmem(unsigned long size)
 {
     return NULL;
 }
+
+__attribute__((annotate("ALLOC_RET"), annotate("AllocSize:Arg0")))
+void *Perl_malloc(unsigned long size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_RET"), annotate("AllocSize:Arg0")))
+void *_Z11Perl_mallocm(unsigned long size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_RET"), annotate("AllocSize:Arg0")))
+void *Perl_safesysmalloc(unsigned long size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_RET"), annotate("AllocSize:Arg0")))
+void *_Z18Perl_safesysmallocm(unsigned long size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_RET"), annotate("AllocSize:Arg0*Arg1")))
+void *Perl_calloc(unsigned long nitems, unsigned long size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_RET"), annotate("AllocSize:Arg0*Arg1")))
+void *_Z11Perl_callocmm(unsigned long nitems, unsigned long size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_RET"), annotate("AllocSize:Arg0*Arg1")))
+void *Perl_safesyscalloc(unsigned long nitems, unsigned long size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_RET"), annotate("AllocSize:Arg0*Arg1")))
+void *_Z18Perl_safesyscallocmm(unsigned long nitems, unsigned long size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("REALLOC_RET"), annotate("AllocSize:Arg1")))
+char *Perl_realloc(void *ptr, unsigned long size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("REALLOC_RET"), annotate("AllocSize:Arg1")))
+char *_Z12Perl_reallocPvm(void *ptr, unsigned long size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("REALLOC_RET"), annotate("AllocSize:Arg1")))
+char *Perl_safesysrealloc(void *ptr, unsigned long size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("REALLOC_RET"), annotate("AllocSize:Arg1")))
+char *_Z19Perl_safesysreallocPvm(void *ptr, unsigned long size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_RET"), annotate("AllocSize:Arg1*Arg2")))
+void *default_bzalloc(void *opaque, int items, int size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_RET"), annotate("AllocSize:Arg1*Arg2")))
+void *bzalloc(void *opaque, int items, int size)
+{
+    return NULL;
+}
+
 
 void * __rawmemchr(const void * s, int c)
 {
