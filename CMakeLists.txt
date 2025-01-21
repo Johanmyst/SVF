@@ -16,9 +16,12 @@ include(FetchContent)
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
-# Build SVF with C++ standard C++17
+# Build SVF with C++ standard C++17 and the C standard C11 (with GNU extensions (required))
+set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_C_EXTENSIONS ON)
 set(CMAKE_CXX_EXTENSIONS ON)
+set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # # Ensure the RPATH is used for the build tree
@@ -90,10 +93,30 @@ if(SVF_ASSERTIONS)
     add_compile_definitions(UNDEBUG)
 
     # If this is a release build, CMake automatically adds -DNDEBUG, so remove it manually
-    string(REGEX REPLACE "\-?DNDEBUG" "" CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE}")
-    string(REGEX REPLACE "\-?DNDEBUG" "" CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE}")
-    string(REGEX REPLACE "\-?DNDEBUG" "" CMAKE_C_FLAGS_RELWITHDEBINFO "${CMAKE_C_FLAGS_RELWITHDEBINFO}")
-    string(REGEX REPLACE "\-?DNDEBUG" "" CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO}")
+    string(
+        REGEX
+        REPLACE "\-?DNDEBUG"
+                ""
+                CMAKE_C_FLAGS_RELEASE
+                "${CMAKE_C_FLAGS_RELEASE}")
+    string(
+        REGEX
+        REPLACE "\-?DNDEBUG"
+                ""
+                CMAKE_CXX_FLAGS_RELEASE
+                "${CMAKE_CXX_FLAGS_RELEASE}")
+    string(
+        REGEX
+        REPLACE "\-?DNDEBUG"
+                ""
+                CMAKE_C_FLAGS_RELWITHDEBINFO
+                "${CMAKE_C_FLAGS_RELWITHDEBINFO}")
+    string(
+        REGEX
+        REPLACE "\-?DNDEBUG"
+                ""
+                CMAKE_CXX_FLAGS_RELWITHDEBINFO
+                "${CMAKE_CXX_FLAGS_RELWITHDEBINFO}")
 else()
     message(STATUS "Disabling assertions statements in compiled code")
     add_compile_definitions(NDEBUG)
@@ -125,7 +148,11 @@ elseif(SVF_SANITIZE STREQUAL "thread")
     message(STATUS "Creating sanitiser build with ThreadSanitiser")
     add_compile_options(-fsanitize=thread)
     add_link_options(-fsanitize=thread)
-elseif(NOT SVF_SANITIZE STREQUAL "")
+elseif(
+    NOT
+    SVF_SANITIZE
+    STREQUAL
+    "")
     message(FATAL_ERROR "Unrecognised sanitiser mode: ${SVF_SANITIZE}")
 else()
     message(STATUS "Not building with sanitiser")
@@ -172,11 +199,21 @@ else()
 
     # Try to find any (even different static/shared mode) instances of Z3 as a fall-back
     if(NOT Z3_LIBRARIES)
-        find_library(Z3_LIBRARIES z3 HINTS ${Z3_DIR} ENV Z3_DIR REQUIRED)
+        find_library(
+            Z3_LIBRARIES z3
+            HINTS ${Z3_DIR}
+                  ENV
+                  Z3_DIR
+                  REQUIRED)
     endif()
 
     # Also find Z3's header files
-    find_path(Z3_INCLUDES z3++.h HINTS ${Z3_DIR} ENV Z3_DIR REQUIRED)
+    find_path(
+        Z3_INCLUDES z3++.h
+        HINTS ${Z3_DIR}
+              ENV
+              Z3_DIR
+              REQUIRED)
 
     # If found, manually create a Z3 package to nicely export the location(s)
     message(STATUS "Found Z3 libraries (${Z3_LIBRARIES}) and headers (${Z3_INCLUDES})")
