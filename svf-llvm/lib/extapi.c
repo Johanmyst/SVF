@@ -1369,3 +1369,405 @@ const char *zError(int a)
 {
     return zError_global;
 }
+
+// SPEC PerlBench allocators
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *Perl_malloc(unsigned long size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *Perl_safesysmalloc(unsigned long size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0*Arg1")))
+void *Perl_calloc(unsigned long nitems, unsigned long size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0*Arg1")))
+void *Perl_safesyscalloc(unsigned long nitems, unsigned long size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("REALLOC_HEAP_RET"), annotate("AllocSize:Arg1")))
+char *Perl_realloc(void *ptr, unsigned long size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("REALLOC_HEAP_RET"), annotate("AllocSize:Arg1")))
+char *Perl_safesysrealloc(void *ptr, unsigned long size)
+{
+    return NULL;
+}
+
+// SPEC BZip allocators
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *default_bzalloc(unsigned long size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *bzalloc(unsigned long size)
+{
+    return NULL;
+}
+
+// ARVO/Phoronix suite allocators
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *aom_malloc(size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0*Arg1")))
+void *aom_calloc(size_t nmemb, size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0*Arg1")))
+void *aom_memalign(size_t nmemb, size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *_ZN7MyClass10dumb_allocEm(size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0*Arg1")))
+void *_ZN5Botan15allocate_memoryEmm(unsigned long nmemb, unsigned long size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+unsigned char *my_malloc(size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *dav1d_malloc(int type, size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *dav1d_alloc_aligned(int type, size_t size, size_t align)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *dav1d_alloc_aligned_internal(size_t size, size_t align)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *av_malloc(size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *av_mallocz(size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0*Arg1")))
+void *av_malloc_array(size_t nmemb, size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0*Arg1")))
+void *av_calloc(size_t nmemb, size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *av_memdup(const void *p, size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:UNKNOWN")))
+char *av_strdup(const char *s)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:UNKNOWN")))
+char *av_strndup(const char *s, size_t len)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *MagickMalloc(const size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *MagickMallocAligned(const size_t align, const size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *MagickMallocCleared(const size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0*Arg1")))
+void *MagickMallocArray(const size_t nmemb, const size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg1*Arg2")))
+void *MagickMallocAlignedArray(const size_t align, const size_t nmemb, const size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *_MagickAllocateResourceLimitedMemory(const size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *FUZZ_malloc(size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *FUZZ_calloc(size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *FUZZ_customMalloc(size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *FUZZ_customCalloc(size_t size)
+{
+    return NULL;
+}
+
+struct _ZSTD_customMem
+{
+    void *(*customAlloc)(void *, size_t);
+    void  (*customFree)(void *, void *);
+    void *opaque;
+};
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *ZSTD_malloc(size_t size, struct _ZSTD_customMem mem)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *ZSTD_calloc(size_t size, struct _ZSTD_customMem mem)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *ZSTD_customMalloc(size_t size, struct _ZSTD_customMem mem)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *ZSTD_customCalloc(size_t size, struct _ZSTD_customMem mem)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *_ZN6LibRaw6mallocEm(size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0*Arg1")))
+void *_ZN6LibRaw6callocEmm(size_t nmemb, size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *_ZN13libraw_memmgr6mallocEm(size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0*Arg1")))
+void *_ZN13libraw_memmgr6callocEmm(size_t nmemb, size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *xmlMalloc(size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *xmlMallocAtomic(size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:UNKNOWN")))
+char *xmlStrdup(const char *str)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:UNKNOWN")))
+char *xmlStrndup(const char *str, int n)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *xmlMallocLoc(size_t size, const char *file, int line)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:Arg0")))
+void *xmlMallocAtomicLoc(size_t size, const char *file, int line)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:UNKNOWN")))
+char *xmlStrdupLoc(const char *str, const char *file, int line)
+{
+    return NULL;
+}
+
+__attribute__((annotate("ALLOC_HEAP_RET"), annotate("AllocSize:UNKNOWN")))
+char *xmlStrndupLoc(const char *str, int n, const char *file, int line)
+{
+    return NULL;
+}
+
+__attribute__((annotate("REALLOC_HEAP_RET"), annotate("AllocSize:Arg1")))
+void *dav1d_realloc(void *ptr, size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("REALLOC_HEAP_RET"), annotate("AllocSize:Arg1")))
+void *av_realloc(void *ptr, size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("REALLOC_HEAP_RET"), annotate("AllocSize:Arg1*Arg2")))
+void *av_realloc_f(void *ptr, size_t nmemb, size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("REALLOC_HEAP_RET"), annotate("AllocSize:Arg1*Arg2")))
+void *av_realloc_array(void *ptr, size_t nmemb, size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("REALLOC_HEAP_RET"), annotate("AllocSize:Arg1")))
+void *MagickRealloc(void *ptr, const size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("REALLOC_HEAP_RET"), annotate("AllocSize:Arg1")))
+void *MagickReallocStd(void *ptr, const size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("REALLOC_HEAP_RET"), annotate("AllocSize:Arg1*Arg2")))
+void *_MagickReallocateResourceLimitedMemory(void *ptr, const size_t nmemb, const size_t size, const unsigned int clear)
+{
+    return NULL;
+}
+
+__attribute__((annotate("REALLOC_HEAP_RET"), annotate("AllocSize:Arg1")))
+void *xmlRealloc(void *ptr, const size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("REALLOC_HEAP_RET"), annotate("AllocSize:Arg1")))
+void *xmlReallocLoc(void *ptr, const size_t size, const char *file, int line)
+{
+    return NULL;
+}
+
+__attribute__((annotate("REALLOC_HEAP_RET"), annotate("AllocSize:Arg1")))
+void *xmlMemRealloc(void *ptr, const size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("REALLOC_HEAP_RET"), annotate("AllocSize:Arg1")))
+void *xmlMemReallocLoc(void *ptr, const size_t size, const char *file, int line)
+{
+    return NULL;
+}
+
+__attribute__((annotate("REALLOC_HEAP_RET"), annotate("AllocSize:Arg1")))
+void *xmlMemoryRealloc(void *ptr, const size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("REALLOC_HEAP_RET"), annotate("AllocSize:Arg1")))
+void *xmlMemoryReallocLoc(void *ptr, const size_t size, const char *file, int line)
+{
+    return NULL;
+}
+
+__attribute__((annotate("REALLOC_HEAP_RET"), annotate("AllocSize:Arg1")))
+void *_ZN6LibRaw7reallocEPvm(void *ptr, size_t size)
+{
+    return NULL;
+}
+
+__attribute__((annotate("REALLOC_HEAP_RET"), annotate("AllocSize:Arg1")))
+void *_ZN13libraw_memmgr7reallocEPvm(void *ptr, size_t size)
+{
+    return NULL;
+}
+
