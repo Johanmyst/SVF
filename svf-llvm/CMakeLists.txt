@@ -21,12 +21,6 @@ if(NOT LLVM_ENABLE_RTTI)
   target_link_options(SvfFlags INTERFACE -fno-rtti)
 endif()
 
-# Make the include/link directories & definitions available globally
-separate_arguments(_LLVM_DEFINITIONS NATIVE_COMMAND ${LLVM_DEFINITIONS})
-include_directories(SYSTEM ${LLVM_INCLUDE_DIRS})
-link_directories(${LLVM_LIBRARY_DIRS})
-add_definitions(${_LLVM_DEFINITIONS})
-
 # Use all components as link targets (picks dynamic/static libs); store in $LLVM_LIBRARIES
 if(LLVM_LINK_LLVM_DYLIB)
   set(LLVM_LIBRARIES LLVM)
@@ -110,17 +104,6 @@ add_dependencies(SvfLLVM gen_extapi_ir)
 # Link the SVF LLVM library to the core library, the build/link flags, and the LLVM libraries
 target_link_libraries(SvfLLVM PUBLIC SVF::Flags SVF::Core ${LLVM_LIBRARIES})
 
-# Also ensure the compiler definitions set by LLVM are exposed to any users of SVF's LLVM library
-target_compile_definitions(SvfLLVM PUBLIC ${_LLVM_DEFINITIONS})
-
-# The include & link directories are absolute & should not be exposed in the public interface so limit to build
-target_include_directories(
-  SvfLLVM
-  SYSTEM
-  PUBLIC ${LLVM_INCLUDE_DIRS}
-)
-target_link_directories(SvfLLVM PUBLIC $<BUILD_INTERFACE:${LLVM_LIBRARY_DIRS}>)
-
 # Gather & set all of the core library's source files by globbing all .h and .cpp files (recursively)
 file(GLOB_RECURSE SVF_LLVM_HEADERS ${CMAKE_CURRENT_LIST_DIR}/include/*.h)
 file(GLOB_RECURSE SVF_LLVM_SOURCES ${CMAKE_CURRENT_LIST_DIR}/lib/*.cpp)
@@ -132,12 +115,8 @@ target_sources(
   PRIVATE ${SVF_LLVM_SOURCES}
 )
 
-# Set & expose the include directories for the LLVM library
-target_include_directories(
-  SvfLLVM
-  PRIVATE ${CMAKE_CURRENT_LIST_DIR}/include
-  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
-)
+# Only expose the headers in the source tree to in-tree users of SVF
+target_include_directories(SvfLLVM PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>)
 
 # Set the library & .so version of the LLVM library
 set_target_properties(SvfLLVM PROPERTIES VERSION ${SVF_VERSION} SOVERSION ${SVF_VERSION_MAJOR})

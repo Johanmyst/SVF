@@ -45,8 +45,20 @@ include(CMakePackageConfigHelpers)
 # Allow checking for IPO support by the used compiler
 include(CheckIPOSupported)
 
-# Since SVF builds into non-standard directories; symlink the compile commands into the top-level directory
-file(CREATE_LINK ${SVF_BINARY_DIR}/compile_commands.json compile_commands.json COPY_ON_ERROR SYMBOLIC)
+# Since SVF builds into non-standard directories; symlink/copy compile commands into top-level directory
+if(WIN32
+   OR MINGW
+   OR MSYS
+   OR CYGWIN
+)
+  file(
+    COPY ${SVF_BINARY_DIR}/compile_commands.json
+    DESTINATION ${CMAKE_CURRENT_LIST_DIR}
+    RENAME compile_commands.json
+  )
+else()
+  file(CREATE_LINK ${SVF_BINARY_DIR}/compile_commands.json compile_commands.json COPY_ON_ERROR SYMBOLIC)
+endif()
 
 # Ensure the configuration input files & module definitions are findable by default
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake" "${CMAKE_CURRENT_LIST_DIR}/cmake/Modules")
@@ -228,6 +240,22 @@ target_include_directories(
   INTERFACE $<BUILD_INTERFACE:${SVF_BINARY_DIR}>
   INTERFACE $<BUILD_INTERFACE:${SVF_BINARY_DIR}/include>
   INTERFACE $<BUILD_INTERFACE:${SVF_BINARY_DIR}/include/SVF>
+)
+
+# Expose installed headers publicly (as system headers to suppress internal warnings to end-users)
+target_include_directories(
+  SvfFlags
+  SYSTEM
+  INTERFACE $<INSTALL_INTERFACE:${SVF_INSTALL_INCLUDEDIR}>
+  INTERFACE $<INSTALL_INTERFACE:${SVF_INSTALL_INCLUDEDIR}/SVF>
+)
+
+# Expose build-tree compiled artifacts only to in-tree users; expose install tree publicly
+target_link_directories(
+  SvfFlags
+  INTERFACE $<BUILD_INTERFACE:${SVF_BINARY_DIR}>
+  INTERFACE $<BUILD_INTERFACE:${SVF_BINARY_DIR}/lib>
+  INTERFACE $<INSTALL_INTERFACE:${SVF_INSTALL_LIBDIR}>
 )
 
 # Expose build-tree extapi.bc to in-tree users of SVF (i.e. building SVF as subproject)

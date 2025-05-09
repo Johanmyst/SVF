@@ -17,6 +17,18 @@ with section("parse"):  # type: ignore
                 "INTERFACE": "+",
             },
         },
+        "target_link_directories": {
+            "pargs": 1,
+            "flags": [
+                "AFTER",
+                "BEFORE",
+            ],
+            "kwargs": {
+                "PUBLIC": "+",
+                "PRIVATE": "+",
+                "INTERFACE": "+",
+            },
+        },
         "target_compile_options": {
             "pargs": 1,
             "flags": [
