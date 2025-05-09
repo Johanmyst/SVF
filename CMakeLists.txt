@@ -91,7 +91,7 @@ option(SVF_USE_LLD "Use LLVM's ld.lld linker instead of the default linker")
 option(SVF_COVERAGE "Create a coverage build (-fprofile-arcs & -ftest-coverage)")
 option(SVF_DEBUG_INFO "Enable & explicitly preserve debug info (-g3); also in release builds")
 option(SVF_WARN_AS_ERROR "Treat all compiler warnings as errors when building SVF (default: on)" ON)
-option(SVF_EXPORT_DYNAMIC "Export all (not only the actually used) symbols to dynamic symbol table" ON)
+option(SVF_EXPORT_DYNAMIC "Export all (not only the actually used) symbols to dynamic symbol table" OFF)
 option(SVF_ENABLE_ASSERTIONS "Always enable debugging assertions, also if the build type is a release build")
 
 # If building dynamic libraries, always enable PIC

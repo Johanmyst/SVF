@@ -60,12 +60,8 @@ set(SVF_BUILD_DIR "@SVF_BINARY_DIR@")
 set(SVF_BUILD_EXTAPI_BC "@SVF_BUILD_EXTAPI_BC@")
 set(SVF_EXTAPI_BC_NAME "@SVF_EXTAPI_BC_NAME@")
 
-# Set location of extapi.bc (relocatable & installed)
-target_compile_definitions(SVF::Flags INTERFACE SVF_INSTALL_EXTAPI_BC="${SVF_INSTALL_EXTAPI_BC}")
-
-# Expose install tree publicly (for linking/including)
-target_link_directories(SVF::Flags INTERFACE ${SVF_INSTALL_LIBDIR})
-target_include_directories(SVF::Flags SYSTEM INTERFACE ${SVF_INSTALL_INCLUDEDIR} ${SVF_INSTALL_INCLUDEDIR}/SVF)
+# Add the absolute paths of the extapi.bc bitcode file to the imported target's compiler definitions interface
+target_compile_definitions(SVF::SvfFlags INTERFACE SVF_INSTALL_EXTAPI_BC="${SVF_INSTALL_EXTAPI_BC}")
 
 # Make `find_dependency()` available
 include(CMakeFindDependencyMacro)
