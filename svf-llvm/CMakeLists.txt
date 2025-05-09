@@ -21,6 +21,12 @@ if(NOT LLVM_ENABLE_RTTI)
   target_link_options(SvfFlags INTERFACE -fno-rtti)
 endif()
 
+# Make the include/link directories & definitions available globally
+separate_arguments(_LLVM_DEFINITIONS NATIVE_COMMAND ${LLVM_DEFINITIONS})
+include_directories(SYSTEM ${LLVM_INCLUDE_DIRS})
+link_directories(${LLVM_LIBRARY_DIRS})
+add_definitions(${_LLVM_DEFINITIONS})
+
 # Use all components as link targets (picks dynamic/static libs); store in $LLVM_LIBRARIES
 if(LLVM_LINK_LLVM_DYLIB)
   set(LLVM_LIBRARIES LLVM)

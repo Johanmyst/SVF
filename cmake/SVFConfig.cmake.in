@@ -72,4 +72,10 @@ find_dependency(Z3 REQUIRED)
 # Find upstream LLVM (required)
 find_dependency(LLVM CONFIG REQUIRED)
 
+# Make the include/link directories & definitions available globally for users of SVF
+separate_arguments(_LLVM_DEFINITIONS NATIVE_COMMAND ${LLVM_DEFINITIONS})
+include_directories(SYSTEM ${LLVM_INCLUDE_DIRS})
+link_directories(${LLVM_LIBRARY_DIRS})
+add_definitions(${_LLVM_DEFINITIONS})
+
 check_required_components("@PROJECT_NAME@")
